@@ -17,7 +17,6 @@ namespace employeeServices.Infrastructure.Repositories
 
         public EmployeeResponse CreateEmployee(EmployeeRequest employeeRequest)
         {
-
             return new EmployeeResponse();
         }
 

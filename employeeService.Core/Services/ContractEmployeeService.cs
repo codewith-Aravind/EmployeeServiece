@@ -19,27 +19,8 @@ namespace employeeService.Core.Services
 
         public EmployeeResponse CreateEmployee(EmployeeRequest employeeRequest)
         {
-            if (tblemployees != null)
-            {
-                EmployeeResponse createEmployeeRequest = new EmployeeResponse()
-                {
-                    EmployeeId = employeeRequest.EmployeeId,
-                    EmployeeName = employeeRequest.EmployeeName,
-                    EmployeeAge = employeeRequest.EmployeeAge,
-                    Salary = employeeRequest.Salary,
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
-                };
-
-                tblemployees.Add(createEmployeeRequest);
-
-                return createEmployeeRequest;
-            }
-            else
-            {
-                return new EmployeeResponse();
-            }
-
+            var result = _employeeRepository.CreateEmployee(employeeRequest);
+            return _mapper.Map<EmployeeResponse>(result);
         }
 
         public bool DeleteEmployee(int employeeId)
@@ -69,7 +50,7 @@ namespace employeeService.Core.Services
 
         }
 
-        public async Task< EmployeeResponse> GetEmployeeByIdAsync(int employeeId)
+        public async Task<EmployeeResponse> GetEmployeeByIdAsync(int employeeId)
         {
             var info = await _employeeRepository.GetEmployeeByIdAsync(employeeId);
 
